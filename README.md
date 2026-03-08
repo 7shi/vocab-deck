@@ -4,8 +4,10 @@ VocabDeck is a flashcard application for vocabulary study, driven by `vocab-toml
 
 ## Usage
 
+The intended workflow is to generate vocab TOML files from YouTube videos using `youtube.sh` (see [Content Creation Workflow](#content-creation-workflow)), then load them in the flashcard server for study.
+
 ```bash
-uv run flashcard/server.py [--host 127.0.0.1] [--port 8000] [-m MODEL] [--data-dir PATH] [--memo-db PATH]
+uv run vocab-deck [--host 127.0.0.1] [--port 8000] [-m MODEL] [--data-dir PATH] [--memo-db PATH]
 ```
 
 `-m/--model` specifies the Ollama model for AI generation (default: `gpt-oss:120b`). The model is kept resident in memory (`keep_alive=-1`) to avoid repeated load times.
@@ -18,7 +20,7 @@ Then open `http://localhost:8000/` in a browser.
 
 ### Navigation
 
-The nav row has four equal-width buttons: ← 前へ, 🔊 読み上げ, フリップ, 次へ →. Keyboard shortcuts are shown in each button label.
+The nav row has four equal-width buttons. Keyboard shortcuts are shown in each button label.
 
 | Key | Action |
 |---|---|
