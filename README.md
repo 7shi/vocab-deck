@@ -39,6 +39,10 @@ The nav row has four equal-width buttons. Keyboard shortcuts are shown in each b
 
 ### TTS (Text-to-Speech)
 
+TTS uses the browser's [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API). Major languages are supported in Chrome with online voices, but Microsoft Edge covers a wider range of languages and is recommended for less common languages.
+
+> **Note:** In Edge, online voices are not available until the browser's built-in Read Aloud feature has been used at least once on any webpage. After that, online voices become available to the Web Speech API.
+
 The 🔊 読み上げ button (`[Space]`) is face-aware: on the front it reads the word; on the back it reads the example sentence, with word-level highlighting as it is spoken. Cards display silently; speech is triggered by the user.
 
 If a voice fails silently, the app retries through all available voices for the language. The first working voice is remembered across page loads, so subsequent cards start without retrying.
