@@ -60,7 +60,9 @@ Buttons above the card filter by layer (L1–L3) or show all cards. 🔀 Shuffle
 
 ## Content Creation Workflow
 
-Vocab TOML files are created from YouTube videos using a pipeline of Claude Code skills and shell scripts.
+Vocab TOML files are created from YouTube videos using a pipeline of [Gemini CLI](https://github.com/google-gemini/gemini-cli) skills and shell scripts. The skills in `skills/` must be installed into Gemini CLI beforehand.
+
+> **Note:** The shell scripts are hardcoded to use Gemini CLI. To use them with Claude Code or another AI CLI, edit the scripts to invoke the appropriate command.
 
 ### Skills (`skills/`)
 
@@ -74,8 +76,8 @@ Vocab TOML files are created from YouTube videos using a pipeline of Claude Code
 
 | Script | Usage | Description |
 |---|---|---|
-| `youtube.sh` | `youtube.sh <YouTube-URL>` | Runs the full pipeline — `youtube-subtitle` → `vocab-toml` → `article-summary-integrator` — then displays the generated summary with `richmd` |
-| `summarize.sh` | `summarize.sh <target>` | Runs `article-summary-integrator` on an existing file and displays the result with `richmd` |
+| `youtube.sh` | `youtube.sh <YouTube-URL>` | Runs the full pipeline — `youtube-subtitle` → `vocab-toml` → `article-summary-integrator` — then displays the generated summary with `richmd`. Requires [Gemini CLI](https://github.com/google-gemini/gemini-cli). |
+| `summarize.sh` | `summarize.sh <target>` | Runs `article-summary-integrator` on an existing file and displays the result with `richmd`. Requires [Gemini CLI](https://github.com/google-gemini/gemini-cli). |
 
 ### Typical Workflow
 
