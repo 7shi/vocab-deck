@@ -66,7 +66,7 @@ Vocab TOML files are created from YouTube videos using a pipeline of Claude Code
 
 | Skill | Description |
 |---|---|
-| `youtube-subtitle` | Downloads the original-language auto-caption from a YouTube video, converts VTT to plain text, and saves it as `YYYYMMDD-xxx-yyy.<lang>-orig.txt` |
+| `youtube-subtitle` | Downloads the original-language auto-caption from a YouTube video, converts VTT to plain text, and saves it as `YYYYMMDD-xxx-yyy.<lang>-orig.txt`. Requires [yt-dlp](https://github.com/yt-dlp/yt-dlp). |
 | `vocab-toml` | Reads a subtitle text file and extracts vocabulary using a 3-layer priority model (L1: high-frequency content words, L2: domain-specific terms, L3: proper nouns), then writes a `.toml` flashcard file |
 | `article-summary-integrator` | Summarizes and integrates one or more Markdown/text files into a single Japanese summary saved under `gemini/` |
 
