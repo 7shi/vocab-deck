@@ -1,50 +1,65 @@
-# Design Concepts of VocabDeck (CONCEPTS)
+# Design Concepts of VocabDeck
 
-## 1. Objective: Curiosity-Driven Efficiency in Language Learning
-VocabDeck is a vocabulary study support system designed with the assumption that existing video content, such as YouTube, will be used as learning material. Its design incorporates several intentions to efficiently "familiarize the brain" with an unknown language.
+VocabDeck is a system designed to support language acquisition by leveraging existing video content (e.g., YouTube) as learning material. This document outlines the underlying design philosophy and the cognitive pipeline used to transform unknown sounds into recognizable vocabulary.
 
-*   **Language for Knowledge**: The primary goal is not necessarily the mastery of the language itself, but rather **direct access to the "native history and geography"** narrated through that language.
-*   **Curiosity as Fuel**: Instead of memorizing textbook-style fixed phrases, the motivation for learning is to understand topics of personal interest, such as historical episodes or geographical facts.
-*   **Focus on Receptive Skills (Input)**: Considering that opportunities for active conversation are often limited, we focus on enhancing "receptive skills"—listening to narrations and understanding context. Language is positioned as a tool for accessing the knowledge (content) of the region.
+## 1. Objective: Bridging Content and Language
 
-## 2. The 3-Layer Priority Model: Cognitive Load Management
-To distribute the learning burden and facilitate a smooth transition to video viewing, vocabulary is categorized into three layers based on its nature:
+The system is designed for learners who may not have immediate opportunities for conversation or travel but seek a practical connection to a language through authentic media.
 
-*   **Layer 1: High-Frequency & High Semantic Density (~10 words)**
-    *   The structural backbone of the language. Like "core tokens" in an LLM, these serve as a compass for grasping the logical structure and following the thread of the story.
-*   **Layer 2: Domain-Specific Vocabulary (~10 words)**
-    *   Terms specialized for specific themes like history or geography. These are keys to understanding the topic-specific context.
-*   **Layer 3: Proper Nouns (Unlimited)**
-    *   Names of people, places, and events—the anchors to **Local Reality**.
-    *   By recognizing these in their "local sound" rather than through a translation filter, auditory comprehension during video viewing is significantly improved.
+*   **Authentic Content as a Gateway**: Language is inseparable from its cultural and historical context. By engaging directly with primary sources like narrations and documentaries, the learner establishes a practical interface with the language.
+*   **Input-Centric Acquisition**: The focus is on auditory recognition and gradual vocabulary expansion. This allows learners to build background knowledge of history and culture concurrently with lexical growth.
 
-## 3. Cognitive Pipeline: Fixing Sounds and Bridging Meaning
-The process of transforming unknown sounds into "meaningful words" assumes a three-step approach to assist brain processing.
+## 2. Cognitive Load Management: The Warm-up Model
 
-### Step 1: Sound Fixing (Tokenization) [Hint]
-We map the unknown sounds of a foreign language onto familiar sound patterns of a known language (e.g., Japanese).
-*   **Role**: Enables the brain to identify unknown noise as "known tokens," creating a foundation for listening.
-*   **State**: Establishing the feeling of "I don't know the meaning yet, but I recognize this sound as a chunk (I can repeat it)."
+To facilitate a smooth transition to video viewing, vocabulary is filtered into a three-layer priority model. This "pre-processing" is designed to be completed in 5–10 minutes to maintain consistency.
 
-### Step 2: Provisional Bridging (Adapter) [Memo]
-We temporarily connect the "fixed sound" to a "meaning" through narratives or phonetic mnemonics (*Kojitsuke*).
-*   **Role**: Utilizing existing memories (Japanese vocabulary or episodic memory) to "attach" a temporary meaning to the unknown sound, acting as an "Adapter" (like LoRA).
-*   **State**: Securing a "mnemonic hook" to assist recall during video viewing until the memory is solidified.
+*   **Layer 1**: High-frequency structural words (~10 words).
+*   **Layer 2**: Domain-specific terms (e.g., history, geography) (~10 words).
+*   **Layer 3**: Proper nouns (unlimited).
 
-### Step 3: Authentic Meaning (Acquisition through Practice) [Examples/Original Content]
-Finally, through repeated exposure to various contexts, such as the video itself or usage examples, the original meaning and nuances of the word are solidified in the brain.
-*   **Role**: Gradually making the "provisional bridge" unnecessary and connecting the sound directly to the concept.
+Strictly limiting Layers 1 and 2 prevents cognitive overload, ensuring the "warm-up" remains a sustainable routine rather than an exhaustive study session.
 
-## 4. Operational Philosophy: "Context Engineering" for Videos
-The "warm-up" in VocabDeck functions as a **5-10 minute pre-processing step** before engaging with the main content.
+## 3. Data Generation Pipeline
 
-*   **Context Engineering for Inference**: If watching a video is seen as "Inference," this process is not "Learning" (model update), but rather **"Context Engineering"** (controlling the context during inference).
-*   **Brain Preparation**: By familiarizing the "sounds" of key words beforehand and placing them in the brain's short-term memory (context window), we ensure that during the actual video, the brain isn't exhausted by "decoding noise" and can focus entirely on "comprehending content."
-*   **Low-Friction Design**: To ensure consistency, we strictly limit Layer 1 and 2 vocabulary to about 10 words each, keeping the cognitive load manageable to make it a sustainable routine.
+The transformation of raw video into structured learning data is automated for efficiency.
 
-## 5. Future Vision: Sustainability and Versatility
-While the current system uses the browser's Web Speech API to achieve high-quality TTS for minor languages at zero cost, long-term maintainability and the convenience of integration with existing platforms are important considerations.
+*   **Extraction via Gemini CLI**: The system utilizes Gemini CLI for extracting key vocabulary from subtitles. Its generous rate limits for free-tier users make it suitable for processing large volumes of text.
+*   **Automation Scripts**: Custom extensions and shell scripts handle the end-to-end workflow, from subtitle retrieval to TOML-formatted data generation.
 
-*   **Integration with Existing Infrastructure**: Integrating with established learning platforms like Anki can provide a more efficient environment for long-term review (learning).
-*   **Cloud TTS for Audio Export**: We are considering supporting the export of audio files via cloud services (e.g., Google Cloud TTS) to facilitate the creation of Anki decks.
-*   **Personal Dynamic Lexicon**: Integrating user-created mnemonics (Memos) into a cross-source database to build a unique, multi-dimensional "map of concepts."
+## 4. Acquisition Pipeline: Auditory Anchoring and "Beachheads"
+
+The flashcard deck employs a multi-step process to transform unknown sounds into meaningful units.
+
+### Auditory Anchoring via TTS
+Auditory exposure is the foundation. TTS (Text-to-Speech) is prioritized to ensure the "sound" of the language is established in the brain.
+*   **Surface (Word)**: Displays the target word; TTS reads the word in isolation.
+*   **Back (Example)**: Displays a sentence from the source video; TTS reads the sentence with real-time word-level highlighting. This allows learners to map sounds to scripts—even unfamiliar ones—without losing their place.
+
+### Step 1: Sound Fixing (Phonetic Mnemonics)
+Building a "beachhead" in an unknown language family is difficult. We use phonetic mnemonics (often called "Soramimi") to fix sounds.
+*   **Mechanism**: Mapping an unknown sound to a known concept or sound in any familiar language. For example, the famous Japanese mnemonic for "What time is it now?" is *Hotta imo ijiruna* ("Don't touch the dug-up potatoes").
+*   **Purpose**: The mnemonic result is less important than the process of ideation, which serves as a cognitive mechanism for repeated auditory exposure.
+
+### Step 2: Provisional Bridging (Associative Memos)
+Mnemonics serve as "training wheels" to connect fixed sounds to meanings. While these associations are provisional, they provide a necessary hook during the initial stages of recognition.
+
+### Step 3: Meaning Establishment (Auditory Salience)
+The back of the card provides context through example sentences. Learners are encouraged to practice "selective recognition"—identifying the target word within the sentence without necessarily parsing every other word. The goal is for words to "pop out" as meaningful units when the learner eventually watches the video.
+
+## 5. Local LLM Integration
+
+The ideation of mnemonics can be cognitively demanding. VocabDeck integrates local LLMs (via Ollama) to assist this process.
+*   **Generative Support**: The LLM suggests multiple candidates for phonetic hints and associative memos.
+*   **Friction Reduction**: Learners can select or modify these suggestions, significantly lowering the barrier to creating effective memory hooks.
+
+## 6. From Context Engineering to Acquisition
+
+This approach treats the warm-up as **Context Engineering for Inference** rather than a primary "Learning" (model update) event.
+*   **Inference-time Prep**: By loading key tokens into the brain's short-term memory (context window) before watching a video, the learner reduces the "decoding noise," allowing more cognitive resources to be dedicated to content comprehension.
+*   **Long-term Reinforcement**: While the prep is temporary, repeated exposure to the same tokens across different videos eventually makes the mnemonics redundant. This accumulation results in genuine lexical acquisition and improved overall comprehension.
+
+## 7. Sustainability and Roadmap
+
+VocabDeck is currently optimized for video preparation but lacks the infrastructure for long-term vocabulary management, such as **Cross-contextual Integration** (unified decks across different sources) and **SRS (Spaced Repetition Systems)**.
+
+Maintaining a standalone learning application is resource-intensive. A more sustainable and realistic approach is integration with established ecosystems like **Anki**. By leveraging Anki's robust SRS and flexible data structures, the mnemonics and assets generated in VocabDeck can be managed and expanded over the long term, ensuring that the "beachheads" established during video prep are turned into permanent linguistic assets.
