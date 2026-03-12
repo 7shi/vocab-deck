@@ -2,6 +2,8 @@
 
 VocabDeck is a flashcard application for vocabulary study, driven by `vocab-toml` TOML files.
 
+For the underlying design philosophy and cognitive learning model, see [CONCEPTS.md](CONCEPTS.md).
+
 ## Usage
 
 The intended workflow is to generate vocab TOML files from YouTube videos using `youtube.sh` (see [Content Creation Workflow](#content-creation-workflow)), then load them in the flashcard server for study.
