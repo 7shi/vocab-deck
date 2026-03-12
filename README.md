@@ -80,10 +80,12 @@ Vocab TOML files are created from YouTube videos using a pipeline of [Gemini CLI
 
 ### Shell Scripts
 
+Both scripts require [Gemini CLI](https://github.com/google-gemini/gemini-cli) and [richmd](https://github.com/7shi/richmd).
+
 | Script | Usage | Description |
 |---|---|---|
-| `youtube.sh` | `youtube.sh <YouTube-URL>` | Runs the full pipeline — `youtube-subtitle` → `vocab-toml` → `article-summary-integrator` — then displays the generated summary with `richmd`. Requires [Gemini CLI](https://github.com/google-gemini/gemini-cli). |
-| `summarize.sh` | `summarize.sh <target>` | Runs `article-summary-integrator` on an existing file and displays the result with `richmd`. Requires [Gemini CLI](https://github.com/google-gemini/gemini-cli). |
+| `youtube.sh` | `youtube.sh <YouTube-URL>` | Runs the full pipeline — `youtube-subtitle` → `vocab-toml` → `article-summary-integrator` — then displays the generated summary with `richmd`. |
+| `summarize.sh` | `summarize.sh <target>` | Runs `article-summary-integrator` on an existing file and displays the result with `richmd`. |
 
 ### Typical Workflow
 
