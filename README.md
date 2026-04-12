@@ -77,15 +77,17 @@ Vocab TOML files are created from YouTube videos using a pipeline of [Gemini CLI
 | `youtube-subtitle` | Downloads the original-language auto-caption from a YouTube video, converts VTT to plain text, and saves it as `YYYYMMDD-xxx-yyy.<lang>-orig.txt`. Requires [yt-dlp](https://github.com/yt-dlp/yt-dlp). |
 | `vocab-toml` | Reads a subtitle text file and extracts vocabulary using a 3-layer priority model (L1: high-frequency content words, L2: domain-specific terms, L3: proper nouns), then writes a `.toml` flashcard file |
 | `article-summary-integrator` | Summarizes and integrates one or more Markdown/text files into a single Japanese summary saved under `gemini/` |
+| `clip-summarize` | Extracts the title from a clipboard dump file's YAML Front Matter, generates a date-prefixed slug, renames the file, and summarizes it via `article-summary-integrator` |
 
 ### Shell Scripts
 
-Both scripts require [Gemini CLI](https://github.com/google-gemini/gemini-cli) and [richmd](https://github.com/7shi/richmd).
+Both scripts require [Gemini CLI](https://github.com/google-gemini/gemini-cli) and [richmd](https://github.com/7shi/richmd). The `-c` option of `summarize.sh` additionally requires [xsel](https://github.com/kfish/xsel) for clipboard access.
 
 | Script | Usage | Description |
 |---|---|---|
 | `youtube.sh` | `youtube.sh <YouTube-URL>` | Runs the full pipeline — `youtube-subtitle` → `vocab-toml` → `article-summary-integrator` — then displays the generated summary with `richmd`. |
 | `summarize.sh` | `summarize.sh <target>` | Runs `article-summary-integrator` on an existing file and displays the result with `richmd`. |
+| `summarize.sh` | `summarize.sh -c` | Reads clipboard content via `xsel`, runs `clip-summarize` to generate a slug and summarize, then displays the result with `richmd`. |
 
 ### Typical Workflow
 
