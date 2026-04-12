@@ -12,7 +12,7 @@ Process a clipboard dump file: extract the title via a bundled script, generate 
 - **`input_file`** (required): Path to the clipboard dump file (e.g., `_clip.tmp`)
 
 ## Workflow
-1. **Extract title**: Run `python3 skills/clip-summarize/scripts/extract_title.py [input_file]`
+1. **Extract title**: Run `uv run skills/clip-summarize/scripts/extract_title.py [input_file]`
    - On success: stdout contains the title; proceed
    - On error: stderr contains the error message; report it and stop
 2. **Get date**: Run `date +%Y%m%d`

@@ -51,7 +51,7 @@ then save the result as a TOML file for use with flashcard tools.
 6. **Find example sentences**: For every word (all layers), find a sentence from the source text that contains the target word; correct transcription errors (misspelled proper nouns, phonetic mishearings) and add missing punctuation; do not rewrite sentence structure; do not truncate with `...`; wrap the target word (or its corrected/inflected form) in `**...**`; in the `translation`, wrap the Japanese equivalent of the target word in `**...**`
 7. **Determine output path**: Replace `.txt` with `.toml` in the input filename
 8. **Write TOML**: Output all entries using `[[word]]` array-of-tables format
-9. **Check**: Run `uv run .gemini/skills/vocab-toml/scripts/check_vocab_toml.py OUTPUT.toml` and review the results:
+9. **Check**: Run `uv run skills/vocab-toml/scripts/check_vocab_toml.py OUTPUT.toml` and review the results:
    - **Errors** (missing fields, no bold, `...` in example, etc.): fix and rewrite the affected entries, then rerun the check until no errors remain
    - **Warnings** (bold/word mismatch): inspect each case — inflected forms and spelling variants in the source text are acceptable; fix only if the bold clearly targets the wrong word
 10. **Report**: Show the output file path and entry counts per layer

@@ -17,7 +17,7 @@ Download the original-language subtitle of a YouTube video, convert it from VTT 
 3. **Generate PREFIX**: Compress the title to 2 English lowercase words → `YYYYMMDD-xxx-yyy`
 4. **Confirm with user**: Show the proposed PREFIX and ask for approval before proceeding
 5. **Download subtitle**: `yt-dlp --write-auto-subs --sub-langs ".*-orig" --skip-download -o "PREFIX.%(ext)s" [url]`
-6. **Convert to text**: `uv run .gemini/skills/youtube-subtitle/scripts/vtt2txt.py PREFIX.<lang>-orig.vtt --url [url] --title [title]`
+6. **Convert to text**: `uv run skills/youtube-subtitle/scripts/vtt2txt.py PREFIX.<lang>-orig.vtt --url [url] --title [title]`
    - `<lang>` is the language code detected in the downloaded filename (e.g. `kn`)
    - `[title]` is the title obtained in step 1
 
