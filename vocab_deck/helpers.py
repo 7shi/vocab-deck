@@ -39,7 +39,7 @@ def detect_lang(stem: str) -> str:
 
 def make_title(stem: str) -> str:
     """Generate a human-readable title from file stem."""
-    base = re.sub(r"\.[a-z]{2,3}-orig$", "", stem)
+    base = re.sub(r"\.[a-z]{2,3}(-orig)?$", "", stem)
     parts = base.split("-", 1)
     if len(parts) == 2 and re.match(r"^\d{8}$", parts[0]):
         date, topic = parts
@@ -134,7 +134,7 @@ def list_tomls() -> list[dict]:
             if not data.get("word"):
                 continue
             stem = path.stem
-            base = re.sub(r"\.[a-z]{2,3}-orig$", "", stem)
+            base = re.sub(r"\.[a-z]{2,3}(-orig)?$", "", stem)
             parts = base.split("-", 1)
             if len(parts) == 2 and re.match(r"^\d{8}$", parts[0]):
                 d = parts[0]
