@@ -79,6 +79,8 @@ Vocab TOML files are created from YouTube videos using a pipeline of [Gemini CLI
 | `article-summary-integrator` | Summarizes and integrates one or more Markdown/text files into a single Japanese summary saved under `gemini/` |
 | `clip-summarize` | Extracts the title from a clipboard dump file's YAML Front Matter, generates a date-prefixed slug, renames the file, and summarizes it via `article-summary-integrator` |
 
+See [SKILL-DESIGN.md](SKILL-DESIGN.md) for lessons learned from designing these skills.
+
 ### Shell Scripts
 
 Both scripts require [Gemini CLI](https://github.com/google-gemini/gemini-cli) and [richmd](https://github.com/7shi/richmd). The `-c` option of `summarize.sh` additionally requires [xsel](https://github.com/kfish/xsel) for clipboard access.
@@ -105,7 +107,7 @@ The generated `.toml` file can then be opened in the flashcard server.
 ### Directory Structure
 
 ```
-flashcard/
+vocab_deck/
 ├── server.py       # FastAPI app: routes and entry point
 ├── helpers.py      # TOML loading, language detection, string utilities
 ├── settings.py     # Persistent settings (read/write settings.toml)
@@ -156,9 +158,4 @@ Delete an entry to reset voice selection for that language.
 
 `card.js` sends log messages to the server via `POST /api/log`, printed to stdout as `[browser] ...`. Set `const DEBUG = false;` to `true` in `card.js` to enable verbose logging. Only TTS errors are logged unconditionally.
 
-## Changelog
-
-- [CHANGELOG.md](CHANGELOG.md) — active history; doubles as a specification and handover document
-- [CHANGELOG.obsolete.md](CHANGELOG.obsolete.md) — entries invalidated by later implementations, kept for reference
-
-`CHANGELOG.md` records what changed and why, in reverse-chronological order (newest first within each date section). Because obsolete entries are moved out, reading it top-to-bottom gives an accurate picture of the current design. Entries that are only partially superseded are edited in place; fully superseded entries are moved to `CHANGELOG.obsolete.md` with a note indicating which later change made them obsolete.
+See [DECISIONS.md](DECISIONS.md) for implementation decisions whose rationale is not evident from the code alone.
