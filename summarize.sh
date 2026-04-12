@@ -11,11 +11,14 @@ if [ "$1" = "-c" ]; then
         echo "エラー: クリップボードが空です" >&2
         exit 1
     fi
+    BEFORE=$(ls -t gemini/*.md 2>/dev/null | head -1)
     gemini --yolo -p "/clip-summarize _clip.tmp"
     LATEST=$(ls -t gemini/*.md 2>/dev/null | head -1)
-    if [ -n "$LATEST" ]; then
-        richmd "$LATEST"
+    if [ -z "$LATEST" ] || [ "$LATEST" = "$BEFORE" ]; then
+        echo "エラー: 出力ファイルが生成されませんでした" >&2
+        exit 1
     fi
+    richmd "$LATEST"
 elif [ -z "$1" ]; then
     echo "使用法: $0 [-c | target]" >&2
     exit 1

@@ -6,13 +6,16 @@ if [ -z "$1" ]; then
 fi
 URL=$1
 
+BEFORE=$(ls -t gemini/*.md 2>/dev/null | head -1)
 gemini --yolo -p "以下の手順を順に実行してください：
 1. /youtube-subtitle $URL を実行して字幕を取得してください。ファイル名の接頭辞（PREFIX）の提案には自動で同意して進めてください。
 2. 生成された字幕テキストファイルに対して /vocab-toml を実行してください。
 3. 同じ字幕テキストファイルに対して /article-summary-integrator を実行してください。"
 
 LATEST=$(ls -t gemini/*.md 2>/dev/null | head -1)
-if [ -n "$LATEST" ]; then
-    echo "$LATEST"
-    richmd "$LATEST"
+if [ -z "$LATEST" ] || [ "$LATEST" = "$BEFORE" ]; then
+    echo "エラー: 出力ファイルが生成されませんでした" >&2
+    exit 1
 fi
+echo "$LATEST"
+richmd "$LATEST"
