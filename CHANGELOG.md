@@ -8,6 +8,10 @@ Policy:
 - Entries invalidated by a later implementation are moved to CHANGELOG.obsolete.md with a note explaining which change superseded them.
 -->
 
+## v0.1.1 (2026-04-13)
+
+- **Fix: language suffix stripped from deck title**: `make_title()` and the `list_tomls()` topic extractor previously only stripped `-orig`-suffixed language tags (e.g. `.ja-orig`). Plain language suffixes (e.g. `.en`, `.ja`) were left in the title, producing names like "Penrose Quantum.En". The regex `\.[a-z]{2,3}-orig$` is now `\.[a-z]{2,3}(-orig)?$` so both forms are removed.
+
 ## v0.1.0 (2026-03-09)
 
 - **Packaged as `vocab-deck` 0.1.0**: The project is now a proper Python package using hatchling as the build backend. `vocab_deck/` gained `__init__.py` (exposes `__name__ = "vocab-deck"` and `__version__` via `importlib.metadata`) and `__main__.py` (enables `python -m vocab_deck`). All intra-package imports converted from bare to relative (`from .module import …`). A `[project.scripts]` entry adds the `vocab-deck` console script (`uv run vocab-deck`). A `--version` flag prints the package name and version from metadata.

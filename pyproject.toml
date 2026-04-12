@@ -1,6 +1,6 @@
 [project]
 name = "vocab-deck"
-version = "0.1.0"
+version = "0.1.1"
 description = "Flashcard application for vocabulary study, driven by vocab-toml TOML files"
 readme = "README.md"
 requires-python = ">=3.10"
