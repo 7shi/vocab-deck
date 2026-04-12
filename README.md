@@ -104,24 +104,9 @@ The generated `.toml` file can then be opened in the flashcard server.
 
 ## Developer Reference
 
-### Directory Structure
+Server code lives in `vocab_deck/`; frontend assets (CSS, JS) in `vocab_deck/static/`.
 
-```
-vocab_deck/
-├── server.py       # FastAPI app: routes and entry point
-├── helpers.py      # TOML loading, language detection, string utilities
-├── settings.py     # Persistent settings (read/write settings.toml)
-├── memo.py         # Per-card memo store (read/write memo.db via sqlite3)
-├── render.py       # HTML page assembly (reads static/ at request time)
-├── ai.py           # LLM-based hint/memo generation (ollama AsyncClient)
-├── settings.toml   # Legacy local file; runtime default now uses ~/.config/vocab-deck/settings.toml
-├── memo.db         # Legacy local file; runtime default now uses ~/.config/vocab-deck/memo.db
-└── static/
-    ├── base.css    # Shared base styles (dark theme, typography)
-    ├── index.css   # Index page styles
-    ├── card.css    # Flashcard page styles
-    └── card.js     # Flashcard UI logic (%%STEM%% / %%LANG%% placeholders)
-```
+See [DECISIONS.md](DECISIONS.md) for implementation decisions whose rationale is not evident from the code alone.
 
 ### Routes
 
@@ -157,5 +142,3 @@ Delete an entry to reset voice selection for that language.
 ### Debug Logging
 
 `card.js` sends log messages to the server via `POST /api/log`, printed to stdout as `[browser] ...`. Set `const DEBUG = false;` to `true` in `card.js` to enable verbose logging. Only TTS errors are logged unconditionally.
-
-See [DECISIONS.md](DECISIONS.md) for implementation decisions whose rationale is not evident from the code alone.
