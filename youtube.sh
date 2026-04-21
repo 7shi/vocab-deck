@@ -4,6 +4,13 @@ if [ -z "$1" ]; then
     echo "使用法: $0 <YouTube-URL>"
     exit 1
 fi
+case "$1" in
+    https://www.youtube.com/watch?v=*) ;;
+    *)
+        echo "エラー: URLは https://www.youtube.com/watch?v= から始まる必要があります" >&2
+        exit 1
+        ;;
+esac
 URL=$1
 
 BEFORE=$(ls -t gemini/*.md 2>/dev/null | head -1)
