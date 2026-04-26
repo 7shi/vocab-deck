@@ -17,11 +17,12 @@ Consolidate one or more source articles (provided as `input_file`) into a single
    - Extract key information, arguments, and conclusions from each file.
    - Merge them into a new, coherent Markdown file written in Japanese.
    - Remove redundancies and ensure a readable format.
-3. **Determine Output Path** (auto-generated):
-   - Use the format `gemini/YYYYMMDD-subject.md` derived from the input file names' date and topic.
+3. **Determine Output Path**:
+   - Use the basename of the primary input file as-is: `gemini/<basename>`.
+   - Do NOT rename or generate a new slug from the content.
 4. **Save to `gemini/` Directory**: Write the result to the auto-generated path.
 
 ## Examples
-- `input_file=20250716-llama4.md 20250716-llama4-reddit.md` → `gemini/20250716-llama4.md`
+- `input_file=20250716-llama4.md 20250716-llama4-reddit.md` → `gemini/20250716-llama4.md` (primary file's basename)
 - `input_file=20250717-gemini-cli.md` → `gemini/20250717-gemini-cli.md`
-- `input_file=20250717-worktrees.md` → `gemini/20250717-worktrees.md`
+- `input_file=27.md` → `gemini/27.md` (preserve filename as-is, do not rename to a slug)
